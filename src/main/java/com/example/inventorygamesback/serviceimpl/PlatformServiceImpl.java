@@ -4,6 +4,8 @@ import com.example.inventorygamesback.entity.Platform;
 import com.example.inventorygamesback.record.PlatformDTO;
 import com.example.inventorygamesback.repository.PlatformRepository;
 import com.example.inventorygamesback.service.PlatformService;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,11 @@ public class PlatformServiceImpl implements PlatformService {
     Platform platformToCreate = convertToEntity(platformDTO);
     Platform createdPlatform = platformRepository.save(platformToCreate);
     return convertToDTO(createdPlatform);
+  }
+
+  @Override
+  public List<PlatformDTO> getAllPlatforms() {
+    return platformRepository.getAllPlatforms().stream().map(this::convertToDTO).collect(Collectors.toList());
   }
 
   private PlatformDTO convertToDTO(Platform platform) {
