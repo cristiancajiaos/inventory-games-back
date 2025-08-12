@@ -17,4 +17,6 @@ public interface PlatformRepository extends JpaRepository<Platform, Long> {
   @Query(value = "SELECT * FROM platforms p ORDER BY p.platform_acronym", nativeQuery = true)
   List<Platform> getAllPlatformsOrderByPlatformAcronym();
 
+  @Query(value = "SELECT * FROM platforms p WHERE LOWER(p.platform_name) LIKE LOWER(CONCAT('%', ?1, '%')) ORDER BY p.platform_name", nativeQuery = true)
+  List<Platform> getAllPlatformsOrderByPlatformNameLike(String name);
 }

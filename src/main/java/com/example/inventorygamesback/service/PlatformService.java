@@ -14,4 +14,6 @@ public interface PlatformService {
 
   List<PlatformDTO> getAllPlatformsOrderByPlatformAcronym();
 
+  List<PlatformDTO> getAllPlatformsOrderByPlatformNameLike(String name);
+
 }
