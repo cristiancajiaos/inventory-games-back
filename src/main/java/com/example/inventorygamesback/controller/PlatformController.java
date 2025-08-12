@@ -38,5 +38,10 @@ public class PlatformController {
     return platformService.getAllPlatformsOrderByPlatformName();
   }
 
+  @GetMapping("/order-acronym")
+  public List<PlatformDTO> getAllPlatformsOrderByPlatformAcronym() {
+    return platformService.getAllPlatformsOrderByPlatformAcronym();
+  }
+
 
 }

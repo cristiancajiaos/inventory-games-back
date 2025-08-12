@@ -38,6 +38,13 @@ public class PlatformServiceImpl implements PlatformService {
         Collectors.toList());
   }
 
+  @Override
+  public List<PlatformDTO> getAllPlatformsOrderByPlatformAcronym() {
+    return platformRepository.getAllPlatformsOrderByPlatformAcronym().stream().map(this::convertToDTO).collect(
+        Collectors.toList());
+  }
+
+
   private PlatformDTO convertToDTO(Platform platform) {
     return new PlatformDTO(platform.getPlatform_id(), platform.getPlatform_name(),
         platform.getPlatform_acronym());
