@@ -41,6 +41,13 @@ public class Game {
   public Game() {
   }
 
+  public Game(Long game_id, String title, Platform platform) {
+    this.game_id = game_id;
+    this.title = title;
+    this.platform = platform;
+  }
+
+
   public Long getGame_id() {
     return game_id;
   }
@@ -55,5 +62,13 @@ public class Game {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public Platform getPlatform() {
+    return platform;
+  }
+
+  public void setPlatform(Platform platform) {
+    this.platform = platform;
   }
 }
