@@ -5,8 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.sql.Timestamp;
+import java.util.List;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +19,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Platform {
 
   @Id
+  @Column(name = "platform_id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long platform_id;
 
@@ -23,6 +28,9 @@ public class Platform {
 
   @Column(name = "platform_acronym")
   private String platform_acronym;
+
+  @OneToMany(mappedBy = "platform")
+  private List<Game> game;
 
   @CreationTimestamp
   private Timestamp created_at;
