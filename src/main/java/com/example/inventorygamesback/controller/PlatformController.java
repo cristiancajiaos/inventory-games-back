@@ -31,7 +31,19 @@ public class PlatformController {
 
   @GetMapping
   public List<PlatformDTO> getAllPlatforms() {
+
     return platformService.getAllPlatforms();
+ }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<PlatformDTO> getPlatformById(@PathVariable("id") Long id) {
+    try {
+      PlatformDTO foundPlatform = platformService.getPlatformById(id);
+      return ResponseEntity.ok(foundPlatform);
+    } catch (Exception ex) {
+      System.err.println("Error: " + ex);
+      return ResponseEntity.notFound().build();
+    }
   }
 
   @GetMapping("/order-name")

@@ -10,6 +10,8 @@ public interface PlatformService {
 
   List<PlatformDTO> getAllPlatforms();
 
+  PlatformDTO getPlatformById(Long id);
+
   List<PlatformDTO> getAllPlatformsOrderByPlatformName();
 
   List<PlatformDTO> getAllPlatformsOrderByPlatformAcronym();

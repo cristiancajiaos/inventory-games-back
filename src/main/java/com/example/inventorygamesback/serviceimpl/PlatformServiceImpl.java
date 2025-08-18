@@ -33,6 +33,12 @@ public class PlatformServiceImpl implements PlatformService {
   }
 
   @Override
+  public PlatformDTO getPlatformById(Long id) {
+    Platform foundPlatform = platformRepository.getPlatformById(id);
+    return convertToDTO(foundPlatform);
+  }
+
+  @Override
   public List<PlatformDTO> getAllPlatformsOrderByPlatformName() {
     return platformRepository.getAllPlatformsOrderByPlatformName().stream().map(this::convertToDTO).collect(
         Collectors.toList());
