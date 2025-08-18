@@ -31,6 +31,12 @@ public class GameServiceImpl implements GameService {
     return gameRepository.getAllGames().stream().map(this::convertToDTO).collect(Collectors.toList());
   }
 
+  @Override
+  public GameDTO getGameById(Long gameId) {
+    Game foundGame = gameRepository.getGameById(gameId);
+    return convertToDTO(foundGame);
+  }
+
   private Game convertToEntity(GameDTO gameDTO) {
     return new Game(gameDTO.game_id(), gameDTO.game_title(), gameDTO.platform());
   }

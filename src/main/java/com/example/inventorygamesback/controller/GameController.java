@@ -1,5 +1,6 @@
 package com.example.inventorygamesback.controller;
 
+import com.example.inventorygamesback.entity.Game;
 import com.example.inventorygamesback.record.GameDTO;
 import com.example.inventorygamesback.service.GameService;
 import java.util.List;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,5 +36,16 @@ public class GameController {
   public ResponseEntity<List<GameDTO>> getAllGames() {
     List<GameDTO> games = gameService.getAllGames();
     return ResponseEntity.ok(games);
+  }
+
+  @GetMapping("/{gameId}")
+  public ResponseEntity<GameDTO> getGameById(@PathVariable("gameId") Long gameId) {
+    try {
+      GameDTO foundGame = gameService.getGameById(gameId);
+      return ResponseEntity.ok(foundGame);
+    } catch (Exception ex) {
+      System.err.println("Error: " + ex);
+      return ResponseEntity.notFound().build();
+    }
   }
 }
