@@ -5,12 +5,14 @@ import com.example.inventorygamesback.record.GameDTO;
 import com.example.inventorygamesback.service.GameService;
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.type.internal.UserTypeJavaTypeWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,13 +54,18 @@ public class GameController {
 
   @GetMapping("/platform/{platformId}")
   public ResponseEntity<List<GameDTO>> getGamesByPlatform(@PathVariable("platformId") Long platformId) {
-    List<GameDTO> emptyList = new ArrayList<>();
+    List<GameDTO> foundGames = gameService.getGamesByPlatform(platformId);
+    return ResponseEntity.ok(foundGames);
+  }
+
+  @PutMapping("/{gameId}")
+  public ResponseEntity<GameDTO> updateGame(@PathVariable("gameId") Long gameId, @RequestBody GameDTO gameDTO) {
     try {
-      List<GameDTO> foundGames = gameService.getGamesByPlatform(platformId);
-      return ResponseEntity.ok(foundGames);
+      GameDTO updatedGame = gameService.updateGame(gameId, gameDTO);
+      return ResponseEntity.ok(updatedGame);
     } catch (Exception ex) {
       System.err.println("Error: " + ex);
-      return ResponseEntity.ok(emptyList);
+      return ResponseEntity.notFound().build();
     }
   }
 }

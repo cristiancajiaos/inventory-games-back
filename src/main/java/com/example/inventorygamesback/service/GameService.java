@@ -12,4 +12,6 @@ public interface GameService {
   GameDTO getGameById(Long gameId);
 
   List<GameDTO> getGamesByPlatform(Long platformId);
+
+  GameDTO updateGame(Long gameId, GameDTO gameDTO);
 }
