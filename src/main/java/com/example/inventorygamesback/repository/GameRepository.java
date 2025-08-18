@@ -14,4 +14,6 @@ public interface GameRepository extends JpaRepository<Game, Long> {
   @Query(value = "SELECT * FROM games g WHERE g.game_id = :gameId", nativeQuery = true)
   Game getGameById(@Param("gameId") Long gameId);
 
+  @Query(value = "SELECT * FROM games g WHERE g.platform_id_fk = :platformId", nativeQuery = true)
+  List<Game> getGamesByPlatform(@Param("platformId") Long platformId);
 }
