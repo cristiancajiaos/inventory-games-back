@@ -9,6 +9,7 @@ import org.hibernate.type.internal.UserTypeJavaTypeWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,17 @@ public class GameController {
     try {
       GameDTO updatedGame = gameService.updateGame(gameId, gameDTO);
       return ResponseEntity.ok(updatedGame);
+    } catch (Exception ex) {
+      System.err.println("Error: " + ex);
+      return ResponseEntity.notFound().build();
+    }
+  }
+
+  @DeleteMapping("/{gameId}")
+  public ResponseEntity<GameDTO> deleteGame(@PathVariable("gameId") Long gameId) {
+    try {
+      GameDTO foundGame = gameService.deleteGame(gameId);
+      return ResponseEntity.ok(foundGame);
     } catch (Exception ex) {
       System.err.println("Error: " + ex);
       return ResponseEntity.notFound().build();

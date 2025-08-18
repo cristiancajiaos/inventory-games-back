@@ -5,6 +5,7 @@ import com.example.inventorygamesback.record.GameDTO;
 import com.example.inventorygamesback.repository.GameRepository;
 import com.example.inventorygamesback.service.GameService;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,13 @@ public class GameServiceImpl implements GameService {
     gameToUpdate.setPlatform(gameDTO.platform());
     Game gameUpdated = gameRepository.save(gameToUpdate);
     return convertToDTO(gameUpdated);
+  }
+
+  @Override
+  public GameDTO deleteGame(Long gameId) {
+    Game foundGame = gameRepository.findById(gameId).orElseThrow();
+    gameRepository.deleteById(gameId);
+    return convertToDTO(foundGame);
   }
 
   private Game convertToEntity(GameDTO gameDTO) {
